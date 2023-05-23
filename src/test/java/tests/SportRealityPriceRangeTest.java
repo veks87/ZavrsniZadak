@@ -16,6 +16,7 @@ public class SportRealityPriceRangeTest extends BaseTest{
         String selectProduct = "Obuća";
         String selectFilter = "Patike";
         String selectGander = "za muškarce";
+        String selectPriceRange = "100";
 
 
         SportRealityHomePage homePage = new SportRealityHomePage(driver);
@@ -25,6 +26,6 @@ public class SportRealityPriceRangeTest extends BaseTest{
         categoryPage.sendFilter(selectProduct);
 
         SportRealityFilterPriceRangePage filterPage = new SportRealityFilterPriceRangePage(driver);
-        filterPage.sendFilters(selectFilter,selectGander);
+        filterPage.sendFilters(selectFilter,selectGander,selectPriceRange);
     }
 }
