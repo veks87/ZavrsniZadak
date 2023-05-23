@@ -75,7 +75,9 @@ public class SportRealityFilterPriceRangePage extends BaseHelper {
     }
 
     private void priceRange(String priceTo) throws InterruptedException {
-
+        wdWait.until(ExpectedConditions.visibilityOf(priceWrapper));
+        WebElement test = driver.findElement(By.name("f_pricelist"));
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});",test);
         String cURL = (String) js.executeScript("return document.URL");
         System.out.println("Current URL is : " + cURL);
         //wdWait.until(ExpectedConditions.visibilityOf(priceWrapper));
@@ -84,17 +86,21 @@ public class SportRealityFilterPriceRangePage extends BaseHelper {
         //List<WebElement> listPrice = priceWrapper.findElements(By.className("items-wrapper"));
         //List<WebElement> listPrice = driver.findElements(By.cssSelector(".filter-price-wrapper>.items-wrapper>.item>.icheckbox_flat"));
         List<WebElement> listPrice = priceWrapper.findElements(By.name("f_pricelist"));
-       // wdWait.until(ExpectedConditions.elementToBeClickable(By.name("f_pricelist")));
+
         for (WebElement list : listPrice) {
             //    System.out.println("Size "+listPrice.size());
             String text = list.getAttribute("value");
-            js.executeScript("arguments[0].scrollIntoView();",priceWrapper);
+
+
+
             System.out.println("Cijene " + text);
             if (text.contains(priceTo)){
-                list.click();
+               // list.click();
+                js.executeScript("arguments[0].click()", list);
                 break;
             }
         }
+        Thread.sleep(4000);
 
         //wdWait.until(ExpectedConditions.invisibilityOfElementWithText(By.className("products-found"),numberOfResults));
     }
